@@ -8,15 +8,21 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.List;
+
 @SpringBootApplication
 public class SpringDataJpaApplication {
 
 	@Bean
 	public CommandLineRunner init(@Autowired Clientes clientes){
 		return args -> {
-			Cliente cliente = new Cliente();
-			cliente.setNome("ital023");
-			clientes.salvar(cliente);
+			clientes.salvar(new Cliente("Italo"));
+			clientes.salvar(new Cliente("davi"));
+
+			List<Cliente> todosClientes = clientes.obterTodos();
+
+			todosClientes.forEach(System.out::println);
+
 		};
 	}
 

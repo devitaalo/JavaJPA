@@ -30,9 +30,10 @@ public class Clientes {
         return jdbcTemplate.query(SELECT_ALL, new RowMapper<Cliente>() {
             @Override
             public Cliente mapRow(ResultSet rs, int rowNum) throws SQLException {
+                Integer id = rs.getInt("id");
+                String nome = rs.getString("nome");
 
-
-                return new Cliente(rs.getString("nome"));
+                return new Cliente(id,nome);
             }
         });
     }
