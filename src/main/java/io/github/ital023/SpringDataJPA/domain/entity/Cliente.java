@@ -2,6 +2,8 @@ package io.github.ital023.SpringDataJPA.domain.entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "TB_CLIENTE")
 public class Cliente {
@@ -11,6 +13,9 @@ public class Cliente {
     private Integer id;
 
     private String nome;
+
+    @OneToMany(mappedBy = "cliente")
+    private List<Pedido> pedidos;
 
     public Cliente() {
     }

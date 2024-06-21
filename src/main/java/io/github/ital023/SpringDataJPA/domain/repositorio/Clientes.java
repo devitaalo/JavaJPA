@@ -18,5 +18,4 @@ public interface Clientes extends JpaRepository<Cliente, Integer> {
     @Modifying //Diz ao BD que está havendo uma atualização tanto deleção quanto atualização
     void deleteByNome(String nome);
 
-
 }
