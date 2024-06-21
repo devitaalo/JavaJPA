@@ -23,6 +23,15 @@ public class SpringDataJpaApplication {
 
 			todosClientes.forEach(System.out::println);
 
+			todosClientes.forEach(cliente -> {
+				cliente.setNome(cliente.getNome() + "atualizado");
+				clientes.atualizar(cliente);
+			});
+
+
+			todosClientes = clientes.obterTodos();
+
+			todosClientes.forEach(System.out::println);
 		};
 	}
 
