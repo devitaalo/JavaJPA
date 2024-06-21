@@ -1,8 +1,15 @@
 package io.github.ital023.SpringDataJPA.domain.entity;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "TB_CLIENTE")
 public class Cliente {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+
     private String nome;
 
     public Cliente() {
