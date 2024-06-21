@@ -16,27 +16,12 @@ public class SpringDataJpaApplication {
 	@Bean
 	public CommandLineRunner init(@Autowired Clientes clientes){
 		return args -> {
-			clientes.save(new Cliente("Italo"));
+			clientes.save(new Cliente("Fulano"));
 			clientes.save(new Cliente("davi"));
 
-			List<Cliente> todosClientes = clientes.findAll();
+			boolean existe = clientes.existsByNome("Italo");
 
-			todosClientes.forEach(System.out::println);
-
-			todosClientes.forEach(cliente -> {
-				cliente.setNome(cliente.getNome() + "atualizado");
-				clientes.save(cliente);
-			});
-
-
-			todosClientes = clientes.findAll();
-
-			todosClientes.forEach(System.out::println);
-
-			System.out.println();
-			System.out.println("Buscando clientes");
-			clientes.findByNomeLike("Ita").forEach(System.out::println);
-
+			System.out.println(existe);
 		};
 	}
 
