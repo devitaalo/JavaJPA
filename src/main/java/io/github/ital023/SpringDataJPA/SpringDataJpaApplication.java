@@ -19,9 +19,9 @@ public class SpringDataJpaApplication {
 			clientes.save(new Cliente("Fulano"));
 			clientes.save(new Cliente("davi"));
 
-			boolean existe = clientes.existsByNome("Italo");
+			List<Cliente> todosClientes = clientes.encontrarPorNome("Fulano");
 
-			System.out.println(existe);
+			todosClientes.forEach(System.out::println);
 		};
 	}
 
