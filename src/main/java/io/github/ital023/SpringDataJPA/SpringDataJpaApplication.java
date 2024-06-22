@@ -14,14 +14,14 @@ import java.util.List;
 public class SpringDataJpaApplication {
 
 	@Bean
-	public CommandLineRunner init(@Autowired Clientes clientes){
+	public CommandLineRunner commandLineRunner(@Autowired Clientes clientes){
 		return args -> {
-			clientes.save(new Cliente("Fulano"));
-			clientes.save(new Cliente("davi"));
-
-			List<Cliente> todosClientes = clientes.encontrarPorNome("Fulano");
-
-			todosClientes.forEach(System.out::println);
+			Cliente c = new Cliente("Italo");
+			Cliente c2 = new Cliente("davi");
+			Cliente c3 = new Cliente("teste");
+			clientes.save(c);
+			clientes.save(c2);
+			clientes.save(c3);
 		};
 	}
 
