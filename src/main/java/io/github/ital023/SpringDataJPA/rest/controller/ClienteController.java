@@ -17,17 +17,6 @@ import java.util.Optional;
 @RequestMapping("/api/clientes")
 public class ClienteController {
 
-    /*@RequestMapping(
-            value = {"/hello/{nome}", "/hello"},
-            method = RequestMethod.GET
-            //consumes = {"application/json", "application/xml"}, //formato como pode receber
-            //produces = {"application/json", "application/xml"} //formato como response body pode ser
-    )
-    @ResponseBody
-    public String helloClientes( @PathVariable("nome") String nomeCliente ){
-        return "Hello: " + nomeCliente;
-    }*/
-
     @Autowired
     private Clientes clientes;
 
