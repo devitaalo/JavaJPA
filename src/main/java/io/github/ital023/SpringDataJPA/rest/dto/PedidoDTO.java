@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 public class PedidoDTO {
 
-    @NotNull(message = "Informe o codigo do cliente")
+    @NotNull(message = "{campo.codigo-cliente.obrigatorio}")
     private Integer cliente;
     @NotNull(message = "Informe o total do pedido e obrigatorio")
     private BigDecimal total;
