@@ -18,9 +18,9 @@ public class SpringDataJpaApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(@Autowired Clientes clientes, @Autowired Produtos produtos){
 		return args -> {
-			Cliente c = new Cliente("Italo");
-			Cliente c2 = new Cliente("davi");
-			Cliente c3 = new Cliente("teste");
+			Cliente c = new Cliente("Italo","2130123");
+			Cliente c2 = new Cliente("davi","9324939");
+			Cliente c3 = new Cliente("TOnhas","102301230");
 			clientes.save(c);
 			clientes.save(c2);
 			clientes.save(c3);

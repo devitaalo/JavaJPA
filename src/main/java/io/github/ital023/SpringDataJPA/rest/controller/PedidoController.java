@@ -2,6 +2,8 @@ package io.github.ital023.SpringDataJPA.rest.controller;
 
 import io.github.ital023.SpringDataJPA.domain.entity.ItemPedido;
 import io.github.ital023.SpringDataJPA.domain.entity.Pedido;
+import io.github.ital023.SpringDataJPA.domain.enums.StatusPedido;
+import io.github.ital023.SpringDataJPA.rest.dto.AtualizacaoStatusPedidoDTO;
 import io.github.ital023.SpringDataJPA.rest.dto.InformacoesItemPedidoDTO;
 import io.github.ital023.SpringDataJPA.rest.dto.InformacoesPedidoDTO;
 import io.github.ital023.SpringDataJPA.rest.dto.PedidoDTO;
@@ -49,6 +51,7 @@ public class PedidoController {
                 .dataPedido(pedido.getDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")))
                 .cpf(pedido.getCliente().getCpf())
                 .nomeCliente(pedido.getCliente().getNome())
+                .status(pedido.getStatus().name())
                 .total(pedido.getTotal())
                 .items(converter(pedido.getItens()))
                 .build();
@@ -70,6 +73,12 @@ public class PedidoController {
                 ).collect(Collectors.toList());
     }
 
+    @PatchMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updateStatus(@PathVariable Integer id,@RequestBody AtualizacaoStatusPedidoDTO dto){
+        String novoStatus = dto.getNovoStatus();
+        pedidoService.atualizaStatus(id, StatusPedido.valueOf(novoStatus));
+    }
 
 
 }

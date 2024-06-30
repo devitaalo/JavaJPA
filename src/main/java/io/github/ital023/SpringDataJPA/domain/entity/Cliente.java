@@ -26,8 +26,9 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(String nome) {
+    public Cliente(String nome,String cpf) {
         this.nome = nome;
+        this.cpf = cpf;
     }
 
     public Cliente(Integer id, String nome) {
@@ -66,6 +67,7 @@ public class Cliente {
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
+
 
     @Override
     public String toString() {

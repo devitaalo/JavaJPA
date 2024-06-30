@@ -1,5 +1,6 @@
 package io.github.ital023.SpringDataJPA.rest.controller;
 
+import io.github.ital023.SpringDataJPA.exception.PedidoNaoEncontradoException;
 import io.github.ital023.SpringDataJPA.exception.RegraNegocioException;
 import io.github.ital023.SpringDataJPA.rest.ApiErrors;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,12 @@ public class ApplicationControllerAdvice {
     public ApiErrors handleRegraNegocioException(RegraNegocioException ex){
         String mensagemErro = ex.getMessage();
         return new ApiErrors(mensagemErro);
+    }
+
+    @ExceptionHandler(PedidoNaoEncontradoException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ApiErrors handlePedidoNotFoundException(PedidoNaoEncontradoException ex){
+        return new ApiErrors(ex.getMessage());
     }
 
 }

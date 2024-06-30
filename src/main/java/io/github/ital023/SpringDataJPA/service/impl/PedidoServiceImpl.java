@@ -4,10 +4,12 @@ import io.github.ital023.SpringDataJPA.domain.entity.Cliente;
 import io.github.ital023.SpringDataJPA.domain.entity.ItemPedido;
 import io.github.ital023.SpringDataJPA.domain.entity.Pedido;
 import io.github.ital023.SpringDataJPA.domain.entity.Produto;
+import io.github.ital023.SpringDataJPA.domain.enums.StatusPedido;
 import io.github.ital023.SpringDataJPA.domain.repositorio.Clientes;
 import io.github.ital023.SpringDataJPA.domain.repositorio.ItemsPedido;
 import io.github.ital023.SpringDataJPA.domain.repositorio.Pedidos;
 import io.github.ital023.SpringDataJPA.domain.repositorio.Produtos;
+import io.github.ital023.SpringDataJPA.exception.PedidoNaoEncontradoException;
 import io.github.ital023.SpringDataJPA.exception.RegraNegocioException;
 import io.github.ital023.SpringDataJPA.rest.dto.ItemsPedidoDTO;
 import io.github.ital023.SpringDataJPA.rest.dto.PedidoDTO;
@@ -50,6 +52,7 @@ public class PedidoServiceImpl implements PedidoService {
         pedido.setTotal(pedidoDTO.getTotal());
         pedido.setDate(LocalDate.now());
         pedido.setCliente(cliente);
+        pedido.setStatus(StatusPedido.REALIZADO);
 
         List<ItemPedido> itemsPedido = converterItems(pedido, pedidoDTO.getItems());
 
@@ -91,6 +94,18 @@ public class PedidoServiceImpl implements PedidoService {
     @Override
     public Optional<Pedido> obterPedidoCompleto(Integer id) {
         return pedidos.findByFetchItens(id);
+    }
+
+    @Override
+    @Transactional
+    public void atualizaStatus(Integer id, StatusPedido statusPedido) {
+        pedidos.findById(id)
+                .map( pedido -> {
+                    pedido.setStatus(statusPedido);
+                    return pedidos.save(pedido);
+                }).orElseThrow(() -> new PedidoNaoEncontradoException());
+
+
     }
 
 }
