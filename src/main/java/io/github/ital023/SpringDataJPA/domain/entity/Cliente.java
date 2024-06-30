@@ -2,6 +2,8 @@ package io.github.ital023.SpringDataJPA.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import org.hibernate.validator.constraints.br.CPF;
 
 import java.util.List;
 
@@ -14,9 +16,12 @@ public class Cliente {
     private Integer id;
 
     @Column(name = "nome", length = 100)
+    @NotEmpty(message = "Campo nome e obrigatorio")
     private String nome;
 
     @Column(name = "cpf", length = 11)
+    @NotEmpty(message = "Campo CPF e obrigatorio")
+    @CPF(message = "Informe um CPF valido")
     private String cpf;
 
     @OneToMany(mappedBy = "cliente" , fetch = FetchType.LAZY)

@@ -2,6 +2,7 @@ package io.github.ital023.SpringDataJPA.rest.controller;
 
 import io.github.ital023.SpringDataJPA.domain.entity.Produto;
 import io.github.ital023.SpringDataJPA.domain.repositorio.Produtos;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -39,7 +40,7 @@ public class ProdutoController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    private Produto save(@RequestBody Produto produto){
+    private Produto save(@RequestBody @Valid Produto produto){
         return produtos.save(produto);
     }
 
@@ -57,7 +58,7 @@ public class ProdutoController {
     }
 
     @PutMapping("/{id}")
-    private void alter(@PathVariable Integer id, @RequestBody Produto produto){
+    private void alter(@PathVariable Integer id, @RequestBody @Valid Produto produto){
 
         produtos.findById(id)
                 .map(produtoAntigo -> {

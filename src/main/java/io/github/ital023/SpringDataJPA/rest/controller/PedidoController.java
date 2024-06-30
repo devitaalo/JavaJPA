@@ -8,6 +8,7 @@ import io.github.ital023.SpringDataJPA.rest.dto.InformacoesItemPedidoDTO;
 import io.github.ital023.SpringDataJPA.rest.dto.InformacoesPedidoDTO;
 import io.github.ital023.SpringDataJPA.rest.dto.PedidoDTO;
 import io.github.ital023.SpringDataJPA.service.PedidoService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.CollectionUtils;
@@ -28,7 +29,7 @@ public class PedidoController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Integer save (@RequestBody PedidoDTO pedidoDTO) {
+    public Integer save (@RequestBody @Valid PedidoDTO pedidoDTO) {
         Pedido pedido = pedidoService.salvar(pedidoDTO);
 
         return pedido.getId();
